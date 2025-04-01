@@ -1,0 +1,216 @@
+transforms:
+  - !DeleteFieldsets
+    from: .*
+    useless: true
+  - !DeleteEnums
+    from: .*
+    bit_size: 1
+  - !Rename
+    from: flexio1::(.*)
+    to: flexio::$1
+  - !Rename
+    from: flexio::Flexio1
+    to: flexio::Flexio
+  - !Rename
+    from: lp(.*)1::(.*)
+    to: lp$1::$2
+  - !Rename
+    from: lp(.*)::Lp(.*)1
+    to: lp$1::Lp$1
+  - !Rename
+    from: adc1::(.*)
+    to: adc::$1
+  - !Rename
+    from: adc::Adc1
+    to: adc::Adc
+  - !Rename
+    from: gpt1::(.*)
+    to: gpt::$1
+  - !Rename
+    from: gpt::Gpt1
+    to: gpt::Gpt
+  - !Rename
+    from: pwm1::(.*)
+    to: pwm::$1
+  - !Rename
+    from: pwm::Pwm1
+    to: pwm::Pwm
+  - !Rename
+    from: wdog1::(.*)
+    to: wdog::$1
+  - !Rename
+    from: wdog::Wdog1
+    to: wdog::Wdog
+  - !Rename
+    from: dma0::(.*)
+    to: dma::$1
+  - !Rename
+    from: dma::Dma0
+    to: dma::Dma
+  - !Rename
+    from: gpio1::(.*)
+    to: gpio::$1
+  - !Rename
+    from: gpio::Gpio1
+    to: gpio::Gpio
+
+  - !MakeRegisterArray
+    blocks: gpio::Gpio
+    from: icr\d+
+    to: icr_x
+
+
+  - !MergeFieldsets
+    from: gpio::regs::Icr(\d+)
+    to: gpio::regs::Icr
+    check: NoCheck
+
+  - !MakeFieldArray
+    fieldsets: gpio::regs::Icr
+    from: icr\d+
+    to: pin
+
+  - !MergeEnums
+    from: gpio::vals::Icr\d+
+    to: gpio::vals::Icr
+
+
+  # USB
+  #- !MakeFieldArray
+  #  fieldsets: usb::regs::Endptsetupstat
+  #  from: endptsetupstat
+  #  to: endptsetupstat
+  #  offset: 1
+
+  - !MergeFieldsets
+    from: flexspi::regs::Ahbrxbuf\d+cr0
+    to: flexspi::regs::AhbrxbufCr0
+    check: NoCheck
+
+  - !MakeRegisterArray
+    blocks: flexspi::Flexspi
+    from: ahbrxbuf\d+cr0
+    to: ahbrxbufcr0
+
+  - !MergeFieldsets
+    from: usb::regs::Endptctrl\d+
+    to: usb::regs::EndptctrlX
+    check: NoCheck
+
+  - !MakeRegisterArray
+    blocks: usb::Usb
+    from: endptctrl\d+
+    to: endptctrl_x
+
+  # IOMUXC
+  - !Rename
+    from: iomuxc::vals::SwMuxCtlPadGpio(..)?(\d+)MuxMode
+    to: iomuxc::vals::GpioMuxMode$1$2
+
+  - !MergeEnums
+    from: iomuxc::vals::SwPadCtlPadGpio.?.?\d+Speed
+    to: iomuxc::vals::GpioSpeed
+
+  - !MergeEnums
+    from: iomuxc::vals::SwPadCtlPadGpio.?.?\d+Pus
+    to: iomuxc::vals::GpioPus
+
+  - !MergeEnums
+    from: iomuxc::vals::SwPadCtlPadGpio.?.?\d+Dse
+    to: iomuxc::vals::GpioDse
+
+  - !MergeFieldsets
+    from: iomuxc::regs::SwPadCtlPadGpio(..)?(\d+)
+    to: iomuxc::regs::GpioCtl
+
+  - !MergeFieldsets
+    from: iomuxc::regs::SwMuxCtlPadGpio(Ad|Sd)?(\d+)
+    to: iomuxc::regs::GpioMuxCtl$1$2
+
+  - !MakeRegisterArray
+    blocks: iomuxc::Iomuxc
+    from: sw_pad_ctl_pad_gpio_\d+
+    to: gpio_ctl_x
+  - !MakeRegisterArray
+    blocks: iomuxc::Iomuxc
+    from: sw_pad_ctl_pad_gpio_ad_\d+
+    to: gpio_ctl_ad_x
+  - !MakeRegisterArray
+    blocks: iomuxc::Iomuxc
+    from: sw_pad_ctl_pad_gpio_sd_\d+
+    to: gpio_ctl_sd_x
+
+  - !RenameFields
+    fieldset: .*
+    from: sw_mux_ctl_pad_gpio_ad_\d+
+    to: mux_gpio_ad_\d+
+
+  - !RenameRegisters
+    block: .*
+    from: sw_mux_ctl_pad_gpio_(.._)?(\d+)
+    to: gpio_mux_$1$2
+
+  # DMA
+  - !MergeEnums
+    from: dma::vals::Tcd\d+([^\d]*)
+    to: dma::vals::Tcd$1
+
+  - !DeleteEnums
+    from: dma::vals::TcdAttrSmod
+
+  - !MergeFieldsets
+    from: dma::regs::Dchpri\d+
+    to: dma::regs::DchpriX
+    check: NoCheck
+
+  - !MakeRegisterArray
+    blocks: dma::Dma
+    from: dchpri\d+
+    to: dchpri_x
+
+  - !MakeBlock
+    blocks: dma::Dma
+    from: tcd(\d+)_(.*)
+    to_block: dma::Tcd
+    to_outer: tcd$1
+    to_inner: $2
+
+  - !MakeRegisterArray
+    blocks: dma::Dma
+    from: tcd\d+
+    to: tcd_x
+
+  - !MakeFieldArray
+    fieldsets: dma::regs::Int
+    from: int\d+
+    to: int
+
+  - !MakeFieldArray
+    fieldsets: dma::regs::Err
+    from: err\d+
+    to: err
+
+  - !MakeFieldArray
+    fieldsets: dma::regs::Erq
+    from: erq\d+
+    to: erq
+
+  - !MakeFieldArray
+    fieldsets: dma::regs::Hrs
+    from: hrs\d+
+    to: hrs
+
+  - !MergeFieldsets
+    from: dma::regs::Tcd\d+([^\d]*)
+    to: dma::regs::Tcd$1
+    check: NoCheck
+
+  - !DeleteDuplicateEnumFields
+    from: .*
+
+  - !Sanitize
+
+      #- !MergeFieldsets
+      #  from: dma::regs::Tcd(\d+)attr
+      #  to: dma::regs::TcdAttr
+

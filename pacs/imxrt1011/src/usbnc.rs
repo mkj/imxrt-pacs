@@ -1,0 +1,30 @@
+#[doc = "USB"]
+#[derive(Copy, Clone, Debug, Eq, PartialEq)]
+pub struct Usbnc {
+    ptr: *mut u8,
+}
+unsafe impl Send for Usbnc {}
+unsafe impl Sync for Usbnc {}
+impl Usbnc {
+    #[inline(always)]
+    pub const unsafe fn from_ptr(ptr: *mut ()) -> Self {
+        Self { ptr: ptr as _ }
+    }
+    #[inline(always)]
+    pub const fn as_ptr(&self) -> *mut () {
+        self.ptr as _
+    }
+    #[doc = "USB OTG1 Control Register"]
+    #[inline(always)]
+    pub const fn usb_otg1_ctrl(self) -> crate::common::Reg<regs::UsbOtg1ctrl, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(2048usize) as _) }
+    }
+    #[doc = "OTG1 UTMI PHY Control 0 Register"]
+    #[inline(always)]
+    pub const fn usb_otg1_phy_ctrl_0(
+        self,
+    ) -> crate::common::Reg<regs::UsbOtg1phyCtrl0, crate::common::RW> {
+        unsafe { crate::common::Reg::from_ptr(self.ptr.add(2072usize) as _) }
+    }
+}
+pub mod regs;

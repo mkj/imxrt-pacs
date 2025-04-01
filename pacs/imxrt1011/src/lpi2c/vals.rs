@@ -1,0 +1,239 @@
+#[repr(u8)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+pub enum Addrcfg {
+    #[doc = "Address match 0 (7-bit)"]
+    ADDRESS_MATCH0_7_BIT = 0,
+    #[doc = "Address match 0 (10-bit)"]
+    ADDRESS_MATCH0_10_BIT = 0x01,
+    #[doc = "Address match 0 (7-bit) or Address match 1 (7-bit)"]
+    ADDRESS_MATCH0_7_BIT_OR_ADDRESS_MATCH1_7_BIT = 0x02,
+    #[doc = "Address match 0 (10-bit) or Address match 1 (10-bit)"]
+    ADDRESS_MATCH0_10_BIT_OR_ADDRESS_MATCH1_10_BIT = 0x03,
+    #[doc = "Address match 0 (7-bit) or Address match 1 (10-bit)"]
+    ADDRESS_MATCH0_7_BIT_OR_ADDRESS_MATCH1_10_BIT = 0x04,
+    #[doc = "Address match 0 (10-bit) or Address match 1 (7-bit)"]
+    ADDRESS_MATCH0_10_BIT_OR_ADDRESS_MATCH1_7_BIT = 0x05,
+    #[doc = "From Address match 0 (7-bit) to Address match 1 (7-bit)"]
+    FROM_ADDRESS_MATCH0_7_BIT_TO_ADDRESS_MATCH1_7_BIT = 0x06,
+    #[doc = "From Address match 0 (10-bit) to Address match 1 (10-bit)"]
+    FROM_ADDRESS_MATCH0_10_BIT_TO_ADDRESS_MATCH1_10_BIT = 0x07,
+}
+impl Addrcfg {
+    #[inline(always)]
+    pub const fn from_bits(val: u8) -> Addrcfg {
+        unsafe { core::mem::transmute(val & 0x07) }
+    }
+    #[inline(always)]
+    pub const fn to_bits(self) -> u8 {
+        unsafe { core::mem::transmute(self) }
+    }
+}
+impl From<u8> for Addrcfg {
+    #[inline(always)]
+    fn from(val: u8) -> Addrcfg {
+        Addrcfg::from_bits(val)
+    }
+}
+impl From<Addrcfg> for u8 {
+    #[inline(always)]
+    fn from(val: Addrcfg) -> u8 {
+        Addrcfg::to_bits(val)
+    }
+}
+#[repr(u8)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+pub enum Cmd {
+    #[doc = "Transmit DATA\\[7:0\\]"]
+    TRANSMIT_DATA_7_THROUGH_0 = 0,
+    #[doc = "Receive (DATA\\[7:0\\] + 1) bytes"]
+    RECEIVE_DATA_7_THROUGH_0_PLUS_ONE = 0x01,
+    #[doc = "Generate STOP condition"]
+    GENERATE_STOP_CONDITION = 0x02,
+    #[doc = "Receive and discard (DATA\\[7:0\\] + 1) bytes"]
+    RECEIVE_AND_DISCARD_DATA_7_THROUGH_0_PLUS_ONE = 0x03,
+    #[doc = "Generate (repeated) START and transmit address in DATA\\[7:0\\]"]
+    GENERATE_START_AND_TRANSMIT_ADDRESS_IN_DATA_7_THROUGH_0 = 0x04,
+    #[doc = "Generate (repeated) START and transmit address in DATA\\[7:0\\]. This transfer expects a NACK to be returned."]
+    GENERATE_START_AND_TRANSMIT_ADDRESS_IN_DATA_7_THROUGH_0_EXPECT_NACK = 0x05,
+    #[doc = "Generate (repeated) START and transmit address in DATA\\[7:0\\] using high speed mode"]
+    GENERATE_START_AND_TRANSMIT_ADDRESS_IN_DATA_7_THROUGH_0_USING_HIGH_SPEED_MODE = 0x06,
+    #[doc = "Generate (repeated) START and transmit address in DATA\\[7:0\\] using high speed mode. This transfer expects a NACK to be returned."]
+    GENERATE_START_AND_TRANSMIT_ADDRESS_IN_DATA_7_THROUGH_0_USING_HIGH_SPEED_MODE_EXPECT_NACK =
+        0x07,
+}
+impl Cmd {
+    #[inline(always)]
+    pub const fn from_bits(val: u8) -> Cmd {
+        unsafe { core::mem::transmute(val & 0x07) }
+    }
+    #[inline(always)]
+    pub const fn to_bits(self) -> u8 {
+        unsafe { core::mem::transmute(self) }
+    }
+}
+impl From<u8> for Cmd {
+    #[inline(always)]
+    fn from(val: u8) -> Cmd {
+        Cmd::from_bits(val)
+    }
+}
+impl From<Cmd> for u8 {
+    #[inline(always)]
+    fn from(val: Cmd) -> u8 {
+        Cmd::to_bits(val)
+    }
+}
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+pub struct Feature(pub u16);
+impl Feature {
+    #[doc = "Master only, with standard feature set"]
+    pub const MASTER_ONLY: Self = Self(0x02);
+    #[doc = "Master and slave, with standard feature set"]
+    pub const MASTER_AND_SLAVE: Self = Self(0x03);
+}
+impl Feature {
+    pub const fn from_bits(val: u16) -> Feature {
+        Self(val & 0xffff)
+    }
+    pub const fn to_bits(self) -> u16 {
+        self.0
+    }
+}
+impl From<u16> for Feature {
+    #[inline(always)]
+    fn from(val: u16) -> Feature {
+        Feature::from_bits(val)
+    }
+}
+impl From<Feature> for u16 {
+    #[inline(always)]
+    fn from(val: Feature) -> u16 {
+        Feature::to_bits(val)
+    }
+}
+#[repr(u8)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+pub enum Matcfg {
+    #[doc = "Match is disabled"]
+    DISABLED = 0,
+    _RESERVED_1 = 0x01,
+    #[doc = "Match is enabled (1st data word equals MDMR\\[MATCH0\\] OR MDMR\\[MATCH1\\])"]
+    FIRST_DATA_WORD_EQUALS_MATCH0_OR_MATCH1 = 0x02,
+    #[doc = "Match is enabled (any data word equals MDMR\\[MATCH0\\] OR MDMR\\[MATCH1\\])"]
+    ANY_DATA_WORD_EQUALS_MATCH0_OR_MATCH1 = 0x03,
+    #[doc = "Match is enabled (1st data word equals MDMR\\[MATCH0\\] AND 2nd data word equals MDMR\\[MATCH1)"]
+    FIRST_DATA_WORD_MATCH0_AND_SECOND_DATA_WORD_MATCH1 = 0x04,
+    #[doc = "Match is enabled (any data word equals MDMR\\[MATCH0\\] AND next data word equals MDMR\\[MATCH1)"]
+    ANY_DATA_WORD_MATCH0_NEXT_DATA_WORD_MATCH1 = 0x05,
+    #[doc = "Match is enabled (1st data word AND MDMR\\[MATCH1\\] equals MDMR\\[MATCH0\\] AND MDMR\\[MATCH1\\])"]
+    FIRST_DATA_WORD_AND_MATCH1_EQUALS_MATCH0_AND_MATCH1 = 0x06,
+    #[doc = "Match is enabled (any data word AND MDMR\\[MATCH1\\] equals MDMR\\[MATCH0\\] AND MDMR\\[MATCH1\\])"]
+    ANY_DATA_WORD_AND_MATCH1_EQUALS_MATCH0_AND_MATCH1 = 0x07,
+}
+impl Matcfg {
+    #[inline(always)]
+    pub const fn from_bits(val: u8) -> Matcfg {
+        unsafe { core::mem::transmute(val & 0x07) }
+    }
+    #[inline(always)]
+    pub const fn to_bits(self) -> u8 {
+        unsafe { core::mem::transmute(self) }
+    }
+}
+impl From<u8> for Matcfg {
+    #[inline(always)]
+    fn from(val: u8) -> Matcfg {
+        Matcfg::from_bits(val)
+    }
+}
+impl From<Matcfg> for u8 {
+    #[inline(always)]
+    fn from(val: Matcfg) -> u8 {
+        Matcfg::to_bits(val)
+    }
+}
+#[repr(u8)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+pub enum Pincfg {
+    #[doc = "2-pin open drain mode"]
+    OPEN_DRAIN_2_PIN = 0,
+    #[doc = "2-pin output only mode (ultra-fast mode)"]
+    OUTPUT_2_PIN_ONLY = 0x01,
+    #[doc = "2-pin push-pull mode"]
+    PUSH_PULL_2_PIN = 0x02,
+    #[doc = "4-pin push-pull mode"]
+    PUSH_PULL_4_PIN = 0x03,
+    #[doc = "2-pin open drain mode with separate LPI2C slave"]
+    OPEN_DRAIN_2_PIN_W_LPI2C_SLAVE = 0x04,
+    #[doc = "2-pin output only mode (ultra-fast mode) with separate LPI2C slave"]
+    OUTPUT_2_PIN_ONLY_W_LPI2C_SLAVE = 0x05,
+    #[doc = "2-pin push-pull mode with separate LPI2C slave"]
+    PUSH_PULL_2_PIN_W_LPI2C_SLAVE = 0x06,
+    #[doc = "4-pin push-pull mode (inverted outputs)"]
+    PUSH_PULL_4_PIN_W_LPI2C_SLAVE = 0x07,
+}
+impl Pincfg {
+    #[inline(always)]
+    pub const fn from_bits(val: u8) -> Pincfg {
+        unsafe { core::mem::transmute(val & 0x07) }
+    }
+    #[inline(always)]
+    pub const fn to_bits(self) -> u8 {
+        unsafe { core::mem::transmute(self) }
+    }
+}
+impl From<u8> for Pincfg {
+    #[inline(always)]
+    fn from(val: u8) -> Pincfg {
+        Pincfg::from_bits(val)
+    }
+}
+impl From<Pincfg> for u8 {
+    #[inline(always)]
+    fn from(val: Pincfg) -> u8 {
+        Pincfg::to_bits(val)
+    }
+}
+#[repr(u8)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+pub enum Prescale {
+    #[doc = "Divide by 1"]
+    DIVIDE_BY_1 = 0,
+    #[doc = "Divide by 2"]
+    DIVIDE_BY_2 = 0x01,
+    #[doc = "Divide by 4"]
+    DIVIDE_BY_4 = 0x02,
+    #[doc = "Divide by 8"]
+    DIVIDE_BY_8 = 0x03,
+    #[doc = "Divide by 16"]
+    DIVIDE_BY_16 = 0x04,
+    #[doc = "Divide by 32"]
+    DIVIDE_BY_32 = 0x05,
+    #[doc = "Divide by 64"]
+    DIVIDE_BY_64 = 0x06,
+    #[doc = "Divide by 128"]
+    DIVIDE_BY_128 = 0x07,
+}
+impl Prescale {
+    #[inline(always)]
+    pub const fn from_bits(val: u8) -> Prescale {
+        unsafe { core::mem::transmute(val & 0x07) }
+    }
+    #[inline(always)]
+    pub const fn to_bits(self) -> u8 {
+        unsafe { core::mem::transmute(self) }
+    }
+}
+impl From<u8> for Prescale {
+    #[inline(always)]
+    fn from(val: u8) -> Prescale {
+        Prescale::from_bits(val)
+    }
+}
+impl From<Prescale> for u8 {
+    #[inline(always)]
+    fn from(val: Prescale) -> u8 {
+        Prescale::to_bits(val)
+    }
+}

@@ -1,0 +1,14 @@
+[workspace]
+members = ["pacs/*"]
+
+[workspace.package]
+version = "0.0.0"
+edition = "2024"
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/korbin/imxrt-pacs"
+keywords = []
+
+[workspace.dependencies]
+cortex-m = { version = "0.7.7", features = ["critical-section-single-core"] }
+cortex-m-rt = { git = "https://github.com/rust-embedded/cortex-m.git" }

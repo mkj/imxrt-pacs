@@ -1,0 +1,387 @@
+#[repr(transparent)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+pub struct Feature(pub u16);
+impl Feature {
+    #[doc = "Standard feature set."]
+    pub const STANDARD: Self = Self(0x01);
+    #[doc = "Standard feature set with MODEM/IrDA support."]
+    pub const MODEM: Self = Self(0x03);
+}
+impl Feature {
+    pub const fn from_bits(val: u16) -> Feature {
+        Self(val & 0xffff)
+    }
+    pub const fn to_bits(self) -> u16 {
+        self.0
+    }
+}
+impl From<u16> for Feature {
+    #[inline(always)]
+    fn from(val: u16) -> Feature {
+        Feature::from_bits(val)
+    }
+}
+impl From<Feature> for u16 {
+    #[inline(always)]
+    fn from(val: Feature) -> u16 {
+        Feature::to_bits(val)
+    }
+}
+#[repr(u8)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+pub enum Idlecfg {
+    #[doc = "1 idle character"]
+    IDLE_1 = 0,
+    #[doc = "2 idle characters"]
+    IDLE_2 = 0x01,
+    #[doc = "4 idle characters"]
+    IDLE_4 = 0x02,
+    #[doc = "8 idle characters"]
+    IDLE_8 = 0x03,
+    #[doc = "16 idle characters"]
+    IDLE_16 = 0x04,
+    #[doc = "32 idle characters"]
+    IDLE_32 = 0x05,
+    #[doc = "64 idle characters"]
+    IDLE_64 = 0x06,
+    #[doc = "128 idle characters"]
+    IDLE_128 = 0x07,
+}
+impl Idlecfg {
+    #[inline(always)]
+    pub const fn from_bits(val: u8) -> Idlecfg {
+        unsafe { core::mem::transmute(val & 0x07) }
+    }
+    #[inline(always)]
+    pub const fn to_bits(self) -> u8 {
+        unsafe { core::mem::transmute(self) }
+    }
+}
+impl From<u8> for Idlecfg {
+    #[inline(always)]
+    fn from(val: u8) -> Idlecfg {
+        Idlecfg::from_bits(val)
+    }
+}
+impl From<Idlecfg> for u8 {
+    #[inline(always)]
+    fn from(val: Idlecfg) -> u8 {
+        Idlecfg::to_bits(val)
+    }
+}
+#[repr(u8)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+pub enum Matcfg {
+    #[doc = "Address Match Wakeup"]
+    ADDR_MATCH = 0,
+    #[doc = "Idle Match Wakeup"]
+    IDLE_MATCH = 0x01,
+    #[doc = "Match On and Match Off"]
+    ONOFF_MATCH = 0x02,
+    #[doc = "Enables RWU on Data Match and Match On/Off for transmitter CTS input"]
+    RWU_MATCH = 0x03,
+}
+impl Matcfg {
+    #[inline(always)]
+    pub const fn from_bits(val: u8) -> Matcfg {
+        unsafe { core::mem::transmute(val & 0x03) }
+    }
+    #[inline(always)]
+    pub const fn to_bits(self) -> u8 {
+        unsafe { core::mem::transmute(self) }
+    }
+}
+impl From<u8> for Matcfg {
+    #[inline(always)]
+    fn from(val: u8) -> Matcfg {
+        Matcfg::from_bits(val)
+    }
+}
+impl From<Matcfg> for u8 {
+    #[inline(always)]
+    fn from(val: Matcfg) -> u8 {
+        Matcfg::to_bits(val)
+    }
+}
+#[repr(u8)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+pub enum Osr {
+    #[doc = "Writing 0 to this field results in an oversampling ratio of 16"]
+    DEFAULT = 0,
+    _RESERVED_1 = 0x01,
+    _RESERVED_2 = 0x02,
+    #[doc = "Oversampling ratio of 4, requires BOTHEDGE to be set."]
+    OSR_4 = 0x03,
+    #[doc = "Oversampling ratio of 5, requires BOTHEDGE to be set."]
+    OSR_5 = 0x04,
+    #[doc = "Oversampling ratio of 6, requires BOTHEDGE to be set."]
+    OSR_6 = 0x05,
+    #[doc = "Oversampling ratio of 7, requires BOTHEDGE to be set."]
+    OSR_7 = 0x06,
+    #[doc = "Oversampling ratio of 8."]
+    OSR_8 = 0x07,
+    #[doc = "Oversampling ratio of 9."]
+    OSR_9 = 0x08,
+    #[doc = "Oversampling ratio of 10."]
+    OSR_10 = 0x09,
+    #[doc = "Oversampling ratio of 11."]
+    OSR_11 = 0x0a,
+    #[doc = "Oversampling ratio of 12."]
+    OSR_12 = 0x0b,
+    #[doc = "Oversampling ratio of 13."]
+    OSR_13 = 0x0c,
+    #[doc = "Oversampling ratio of 14."]
+    OSR_14 = 0x0d,
+    #[doc = "Oversampling ratio of 15."]
+    OSR_15 = 0x0e,
+    #[doc = "Oversampling ratio of 16."]
+    OSR_16 = 0x0f,
+    #[doc = "Oversampling ratio of 17."]
+    OSR_17 = 0x10,
+    #[doc = "Oversampling ratio of 18."]
+    OSR_18 = 0x11,
+    #[doc = "Oversampling ratio of 19."]
+    OSR_19 = 0x12,
+    #[doc = "Oversampling ratio of 20."]
+    OSR_20 = 0x13,
+    #[doc = "Oversampling ratio of 21."]
+    OSR_21 = 0x14,
+    #[doc = "Oversampling ratio of 22."]
+    OSR_22 = 0x15,
+    #[doc = "Oversampling ratio of 23."]
+    OSR_23 = 0x16,
+    #[doc = "Oversampling ratio of 24."]
+    OSR_24 = 0x17,
+    #[doc = "Oversampling ratio of 25."]
+    OSR_25 = 0x18,
+    #[doc = "Oversampling ratio of 26."]
+    OSR_26 = 0x19,
+    #[doc = "Oversampling ratio of 27."]
+    OSR_27 = 0x1a,
+    #[doc = "Oversampling ratio of 28."]
+    OSR_28 = 0x1b,
+    #[doc = "Oversampling ratio of 29."]
+    OSR_29 = 0x1c,
+    #[doc = "Oversampling ratio of 30."]
+    OSR_30 = 0x1d,
+    #[doc = "Oversampling ratio of 31."]
+    OSR_31 = 0x1e,
+    #[doc = "Oversampling ratio of 32."]
+    OSR_32 = 0x1f,
+}
+impl Osr {
+    #[inline(always)]
+    pub const fn from_bits(val: u8) -> Osr {
+        unsafe { core::mem::transmute(val & 0x1f) }
+    }
+    #[inline(always)]
+    pub const fn to_bits(self) -> u8 {
+        unsafe { core::mem::transmute(self) }
+    }
+}
+impl From<u8> for Osr {
+    #[inline(always)]
+    fn from(val: u8) -> Osr {
+        Osr::from_bits(val)
+    }
+}
+impl From<Osr> for u8 {
+    #[inline(always)]
+    fn from(val: Osr) -> u8 {
+        Osr::to_bits(val)
+    }
+}
+#[repr(u8)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+pub enum Rxfifosize {
+    #[doc = "Receive FIFO/Buffer depth = 1 dataword."]
+    FIFO_1 = 0,
+    #[doc = "Receive FIFO/Buffer depth = 4 datawords."]
+    FIFO_4 = 0x01,
+    #[doc = "Receive FIFO/Buffer depth = 8 datawords."]
+    FIFO_8 = 0x02,
+    #[doc = "Receive FIFO/Buffer depth = 16 datawords."]
+    FIFO_16 = 0x03,
+    #[doc = "Receive FIFO/Buffer depth = 32 datawords."]
+    FIFO_32 = 0x04,
+    #[doc = "Receive FIFO/Buffer depth = 64 datawords."]
+    FIFO_64 = 0x05,
+    #[doc = "Receive FIFO/Buffer depth = 128 datawords."]
+    FIFO_128 = 0x06,
+    #[doc = "Receive FIFO/Buffer depth = 256 datawords."]
+    FIFO_256 = 0x07,
+}
+impl Rxfifosize {
+    #[inline(always)]
+    pub const fn from_bits(val: u8) -> Rxfifosize {
+        unsafe { core::mem::transmute(val & 0x07) }
+    }
+    #[inline(always)]
+    pub const fn to_bits(self) -> u8 {
+        unsafe { core::mem::transmute(self) }
+    }
+}
+impl From<u8> for Rxfifosize {
+    #[inline(always)]
+    fn from(val: u8) -> Rxfifosize {
+        Rxfifosize::from_bits(val)
+    }
+}
+impl From<Rxfifosize> for u8 {
+    #[inline(always)]
+    fn from(val: Rxfifosize) -> u8 {
+        Rxfifosize::to_bits(val)
+    }
+}
+#[repr(u8)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+pub enum Rxiden {
+    #[doc = "Disable RDRF assertion due to partially filled FIFO when receiver is idle."]
+    DISABLED = 0,
+    #[doc = "Enable RDRF assertion due to partially filled FIFO when receiver is idle for 1 character."]
+    IDLE_1 = 0x01,
+    #[doc = "Enable RDRF assertion due to partially filled FIFO when receiver is idle for 2 characters."]
+    IDLE_2 = 0x02,
+    #[doc = "Enable RDRF assertion due to partially filled FIFO when receiver is idle for 4 characters."]
+    IDLE_4 = 0x03,
+    #[doc = "Enable RDRF assertion due to partially filled FIFO when receiver is idle for 8 characters."]
+    IDLE_8 = 0x04,
+    #[doc = "Enable RDRF assertion due to partially filled FIFO when receiver is idle for 16 characters."]
+    IDLE_16 = 0x05,
+    #[doc = "Enable RDRF assertion due to partially filled FIFO when receiver is idle for 32 characters."]
+    IDLE_32 = 0x06,
+    #[doc = "Enable RDRF assertion due to partially filled FIFO when receiver is idle for 64 characters."]
+    IDLE_64 = 0x07,
+}
+impl Rxiden {
+    #[inline(always)]
+    pub const fn from_bits(val: u8) -> Rxiden {
+        unsafe { core::mem::transmute(val & 0x07) }
+    }
+    #[inline(always)]
+    pub const fn to_bits(self) -> u8 {
+        unsafe { core::mem::transmute(self) }
+    }
+}
+impl From<u8> for Rxiden {
+    #[inline(always)]
+    fn from(val: u8) -> Rxiden {
+        Rxiden::from_bits(val)
+    }
+}
+impl From<Rxiden> for u8 {
+    #[inline(always)]
+    fn from(val: Rxiden) -> u8 {
+        Rxiden::to_bits(val)
+    }
+}
+#[repr(u8)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+pub enum Tnp {
+    #[doc = "1/OSR."]
+    ONE_SAMPLE = 0,
+    #[doc = "2/OSR."]
+    TWO_SAMPLE = 0x01,
+    #[doc = "3/OSR."]
+    THREE_SAMPLE = 0x02,
+    #[doc = "4/OSR."]
+    FOUR_SAMPLE = 0x03,
+}
+impl Tnp {
+    #[inline(always)]
+    pub const fn from_bits(val: u8) -> Tnp {
+        unsafe { core::mem::transmute(val & 0x03) }
+    }
+    #[inline(always)]
+    pub const fn to_bits(self) -> u8 {
+        unsafe { core::mem::transmute(self) }
+    }
+}
+impl From<u8> for Tnp {
+    #[inline(always)]
+    fn from(val: u8) -> Tnp {
+        Tnp::from_bits(val)
+    }
+}
+impl From<Tnp> for u8 {
+    #[inline(always)]
+    fn from(val: Tnp) -> u8 {
+        Tnp::to_bits(val)
+    }
+}
+#[repr(u8)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+pub enum Trgsel {
+    #[doc = "Input trigger is disabled."]
+    DISABLED = 0,
+    #[doc = "Input trigger is used instead of RXD pin input."]
+    TRG_RXD = 0x01,
+    #[doc = "Input trigger is used instead of CTS_B pin input."]
+    TRG_CTS = 0x02,
+    #[doc = "Input trigger is used to modulate the TXD pin output. The TXD pin output (after TXINV configuration) is internally ANDed with the input trigger."]
+    TRG_TXD = 0x03,
+}
+impl Trgsel {
+    #[inline(always)]
+    pub const fn from_bits(val: u8) -> Trgsel {
+        unsafe { core::mem::transmute(val & 0x03) }
+    }
+    #[inline(always)]
+    pub const fn to_bits(self) -> u8 {
+        unsafe { core::mem::transmute(self) }
+    }
+}
+impl From<u8> for Trgsel {
+    #[inline(always)]
+    fn from(val: u8) -> Trgsel {
+        Trgsel::from_bits(val)
+    }
+}
+impl From<Trgsel> for u8 {
+    #[inline(always)]
+    fn from(val: Trgsel) -> u8 {
+        Trgsel::to_bits(val)
+    }
+}
+#[repr(u8)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+pub enum Txfifosize {
+    #[doc = "Transmit FIFO/Buffer depth = 1 dataword."]
+    FIFO_1 = 0,
+    #[doc = "Transmit FIFO/Buffer depth = 4 datawords."]
+    FIFO_4 = 0x01,
+    #[doc = "Transmit FIFO/Buffer depth = 8 datawords."]
+    FIFO_8 = 0x02,
+    #[doc = "Transmit FIFO/Buffer depth = 16 datawords."]
+    FIFO_16 = 0x03,
+    #[doc = "Transmit FIFO/Buffer depth = 32 datawords."]
+    FIFO_32 = 0x04,
+    #[doc = "Transmit FIFO/Buffer depth = 64 datawords."]
+    FIFO_64 = 0x05,
+    #[doc = "Transmit FIFO/Buffer depth = 128 datawords."]
+    FIFO_128 = 0x06,
+    #[doc = "Transmit FIFO/Buffer depth = 256 datawords"]
+    FIFO_256 = 0x07,
+}
+impl Txfifosize {
+    #[inline(always)]
+    pub const fn from_bits(val: u8) -> Txfifosize {
+        unsafe { core::mem::transmute(val & 0x07) }
+    }
+    #[inline(always)]
+    pub const fn to_bits(self) -> u8 {
+        unsafe { core::mem::transmute(self) }
+    }
+}
+impl From<u8> for Txfifosize {
+    #[inline(always)]
+    fn from(val: u8) -> Txfifosize {
+        Txfifosize::from_bits(val)
+    }
+}
+impl From<Txfifosize> for u8 {
+    #[inline(always)]
+    fn from(val: Txfifosize) -> u8 {
+        Txfifosize::to_bits(val)
+    }
+}
