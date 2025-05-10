@@ -1,0 +1,5 @@
+transforms:
+  - !RenameInterrupts
+  # DMA0_DMA16 to DMA0 etc, for consistency with rt1010
+    from: DMA(.*)_DMA.*
+    to: DMA$1
