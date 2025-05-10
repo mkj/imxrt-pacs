@@ -13,6 +13,28 @@ set -e
   rustfmt ./**/*.rs
 )
 
+(
+  rm -rf pacs/imxrt1061/src
+  mkdir -p pacs/imxrt1061/
+  cd pacs/imxrt1061/
+  chiptool generate --svd ../../svd/MIMXRT1061.svd --transform ../../transforms/common.yaml 
+  form -i lib.rs -o src
+  rm lib.rs
+  echo -ne "#![allow(warnings)]\n#![feature(const_mut_refs)]\n$(cat src/lib.rs)" > ./src/lib.rs
+  rustfmt ./**/*.rs
+)
+
+(
+  rm -rf pacs/imxrt1062/src
+  mkdir -p pacs/imxrt1062/
+  cd pacs/imxrt1062/
+  chiptool generate --svd ../../svd/MIMXRT1062.svd --transform ../../transforms/common.yaml 
+  form -i lib.rs -o src
+  rm lib.rs
+  echo -ne "#![allow(warnings)]\n#![feature(const_mut_refs)]\n$(cat src/lib.rs)" > ./src/lib.rs
+  rustfmt ./**/*.rs
+)
+
 #(
 #  rm -rf pacs/imxrt1064
 #  mkdir -p pacs/imxrt1064/
