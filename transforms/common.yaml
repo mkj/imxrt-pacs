@@ -13,6 +13,9 @@ transforms:
     from: flexio::Flexio1
     to: flexio::Flexio
   - !Rename
+    from: flex_spi::(.*)
+    to: flexspi::$1
+  - !Rename
     from: lp(.*)1::(.*)
     to: lp$1::$2
   - !Rename
