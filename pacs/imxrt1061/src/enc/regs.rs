@@ -1,0 +1,672 @@
+#[doc = "Control Register"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Ctrl(pub u16);
+impl Ctrl {
+    #[doc = "Compare Interrupt Enable"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn cmpie(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Compare Interrupt Enable"]
+    #[inline(always)]
+    pub const fn set_cmpie(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u16) & 0x01) << 0usize);
+    }
+    #[doc = "Compare Interrupt Request"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn cmpirq(&self) -> bool {
+        let val = (self.0 >> 1usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Compare Interrupt Request"]
+    #[inline(always)]
+    pub const fn set_cmpirq(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u16) & 0x01) << 1usize);
+    }
+    #[doc = "Watchdog Enable"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn wde(&self) -> bool {
+        let val = (self.0 >> 2usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Watchdog Enable"]
+    #[inline(always)]
+    pub const fn set_wde(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u16) & 0x01) << 2usize);
+    }
+    #[doc = "Watchdog Timeout Interrupt Enable"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn die(&self) -> bool {
+        let val = (self.0 >> 3usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Watchdog Timeout Interrupt Enable"]
+    #[inline(always)]
+    pub const fn set_die(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u16) & 0x01) << 3usize);
+    }
+    #[doc = "Watchdog Timeout Interrupt Request"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn dirq(&self) -> bool {
+        let val = (self.0 >> 4usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Watchdog Timeout Interrupt Request"]
+    #[inline(always)]
+    pub const fn set_dirq(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u16) & 0x01) << 4usize);
+    }
+    #[doc = "Use Negative Edge of INDEX Pulse"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn xne(&self) -> bool {
+        let val = (self.0 >> 5usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Use Negative Edge of INDEX Pulse"]
+    #[inline(always)]
+    pub const fn set_xne(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u16) & 0x01) << 5usize);
+    }
+    #[doc = "INDEX Triggered Initialization of Position Counters UPOS and LPOS"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn xip(&self) -> bool {
+        let val = (self.0 >> 6usize) & 0x01;
+        val != 0
+    }
+    #[doc = "INDEX Triggered Initialization of Position Counters UPOS and LPOS"]
+    #[inline(always)]
+    pub const fn set_xip(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u16) & 0x01) << 6usize);
+    }
+    #[doc = "INDEX Pulse Interrupt Enable"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn xie(&self) -> bool {
+        let val = (self.0 >> 7usize) & 0x01;
+        val != 0
+    }
+    #[doc = "INDEX Pulse Interrupt Enable"]
+    #[inline(always)]
+    pub const fn set_xie(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u16) & 0x01) << 7usize);
+    }
+    #[doc = "INDEX Pulse Interrupt Request"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn xirq(&self) -> bool {
+        let val = (self.0 >> 8usize) & 0x01;
+        val != 0
+    }
+    #[doc = "INDEX Pulse Interrupt Request"]
+    #[inline(always)]
+    pub const fn set_xirq(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u16) & 0x01) << 8usize);
+    }
+    #[doc = "Enable Signal Phase Count Mode"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn ph1(&self) -> bool {
+        let val = (self.0 >> 9usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Enable Signal Phase Count Mode"]
+    #[inline(always)]
+    pub const fn set_ph1(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u16) & 0x01) << 9usize);
+    }
+    #[doc = "Enable Reverse Direction Counting"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn rev(&self) -> bool {
+        let val = (self.0 >> 10usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Enable Reverse Direction Counting"]
+    #[inline(always)]
+    pub const fn set_rev(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 10usize)) | (((val as u16) & 0x01) << 10usize);
+    }
+    #[doc = "Software-Triggered Initialization of Position Counters UPOS and LPOS"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn swip(&self) -> bool {
+        let val = (self.0 >> 11usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Software-Triggered Initialization of Position Counters UPOS and LPOS"]
+    #[inline(always)]
+    pub const fn set_swip(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 11usize)) | (((val as u16) & 0x01) << 11usize);
+    }
+    #[doc = "Use Negative Edge of HOME Input"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn hne(&self) -> bool {
+        let val = (self.0 >> 12usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Use Negative Edge of HOME Input"]
+    #[inline(always)]
+    pub const fn set_hne(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 12usize)) | (((val as u16) & 0x01) << 12usize);
+    }
+    #[doc = "Enable HOME to Initialize Position Counters UPOS and LPOS"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn hip(&self) -> bool {
+        let val = (self.0 >> 13usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Enable HOME to Initialize Position Counters UPOS and LPOS"]
+    #[inline(always)]
+    pub const fn set_hip(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u16) & 0x01) << 13usize);
+    }
+    #[doc = "HOME Interrupt Enable"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn hie(&self) -> bool {
+        let val = (self.0 >> 14usize) & 0x01;
+        val != 0
+    }
+    #[doc = "HOME Interrupt Enable"]
+    #[inline(always)]
+    pub const fn set_hie(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u16) & 0x01) << 14usize);
+    }
+    #[doc = "HOME Signal Transition Interrupt Request"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn hirq(&self) -> bool {
+        let val = (self.0 >> 15usize) & 0x01;
+        val != 0
+    }
+    #[doc = "HOME Signal Transition Interrupt Request"]
+    #[inline(always)]
+    pub const fn set_hirq(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u16) & 0x01) << 15usize);
+    }
+}
+impl Default for Ctrl {
+    #[inline(always)]
+    fn default() -> Ctrl {
+        Ctrl(0)
+    }
+}
+impl core::fmt::Debug for Ctrl {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Ctrl")
+            .field("cmpie", &self.cmpie())
+            .field("cmpirq", &self.cmpirq())
+            .field("wde", &self.wde())
+            .field("die", &self.die())
+            .field("dirq", &self.dirq())
+            .field("xne", &self.xne())
+            .field("xip", &self.xip())
+            .field("xie", &self.xie())
+            .field("xirq", &self.xirq())
+            .field("ph1", &self.ph1())
+            .field("rev", &self.rev())
+            .field("swip", &self.swip())
+            .field("hne", &self.hne())
+            .field("hip", &self.hip())
+            .field("hie", &self.hie())
+            .field("hirq", &self.hirq())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Ctrl {
+    fn format(&self, f: defmt::Formatter) {
+        defmt :: write ! (f , "Ctrl {{ cmpie: {=bool:?}, cmpirq: {=bool:?}, wde: {=bool:?}, die: {=bool:?}, dirq: {=bool:?}, xne: {=bool:?}, xip: {=bool:?}, xie: {=bool:?}, xirq: {=bool:?}, ph1: {=bool:?}, rev: {=bool:?}, swip: {=bool:?}, hne: {=bool:?}, hip: {=bool:?}, hie: {=bool:?}, hirq: {=bool:?} }}" , self . cmpie () , self . cmpirq () , self . wde () , self . die () , self . dirq () , self . xne () , self . xip () , self . xie () , self . xirq () , self . ph1 () , self . rev () , self . swip () , self . hne () , self . hip () , self . hie () , self . hirq ())
+    }
+}
+#[doc = "Control 2 Register"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Ctrl2(pub u16);
+impl Ctrl2 {
+    #[doc = "Update Hold Registers"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn updhld(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Update Hold Registers"]
+    #[inline(always)]
+    pub const fn set_updhld(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u16) & 0x01) << 0usize);
+    }
+    #[doc = "Update Position Registers"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn updpos(&self) -> bool {
+        let val = (self.0 >> 1usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Update Position Registers"]
+    #[inline(always)]
+    pub const fn set_updpos(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u16) & 0x01) << 1usize);
+    }
+    #[doc = "Enable Modulo Counting"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn mod_(&self) -> bool {
+        let val = (self.0 >> 2usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Enable Modulo Counting"]
+    #[inline(always)]
+    pub const fn set_mod_(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u16) & 0x01) << 2usize);
+    }
+    #[doc = "Count Direction Flag"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn dir(&self) -> bool {
+        let val = (self.0 >> 3usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Count Direction Flag"]
+    #[inline(always)]
+    pub const fn set_dir(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u16) & 0x01) << 3usize);
+    }
+    #[doc = "Roll-under Interrupt Enable"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn ruie(&self) -> bool {
+        let val = (self.0 >> 4usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Roll-under Interrupt Enable"]
+    #[inline(always)]
+    pub const fn set_ruie(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u16) & 0x01) << 4usize);
+    }
+    #[doc = "Roll-under Interrupt Request"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn ruirq(&self) -> bool {
+        let val = (self.0 >> 5usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Roll-under Interrupt Request"]
+    #[inline(always)]
+    pub const fn set_ruirq(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u16) & 0x01) << 5usize);
+    }
+    #[doc = "Roll-over Interrupt Enable"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn roie(&self) -> bool {
+        let val = (self.0 >> 6usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Roll-over Interrupt Enable"]
+    #[inline(always)]
+    pub const fn set_roie(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u16) & 0x01) << 6usize);
+    }
+    #[doc = "Roll-over Interrupt Request"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn roirq(&self) -> bool {
+        let val = (self.0 >> 7usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Roll-over Interrupt Request"]
+    #[inline(always)]
+    pub const fn set_roirq(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u16) & 0x01) << 7usize);
+    }
+    #[doc = "Revolution Counter Modulus Enable"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn revmod(&self) -> bool {
+        let val = (self.0 >> 8usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Revolution Counter Modulus Enable"]
+    #[inline(always)]
+    pub const fn set_revmod(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 8usize)) | (((val as u16) & 0x01) << 8usize);
+    }
+    #[doc = "Output Control"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn outctl(&self) -> bool {
+        let val = (self.0 >> 9usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Output Control"]
+    #[inline(always)]
+    pub const fn set_outctl(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 9usize)) | (((val as u16) & 0x01) << 9usize);
+    }
+}
+impl Default for Ctrl2 {
+    #[inline(always)]
+    fn default() -> Ctrl2 {
+        Ctrl2(0)
+    }
+}
+impl core::fmt::Debug for Ctrl2 {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Ctrl2")
+            .field("updhld", &self.updhld())
+            .field("updpos", &self.updpos())
+            .field("mod_", &self.mod_())
+            .field("dir", &self.dir())
+            .field("ruie", &self.ruie())
+            .field("ruirq", &self.ruirq())
+            .field("roie", &self.roie())
+            .field("roirq", &self.roirq())
+            .field("revmod", &self.revmod())
+            .field("outctl", &self.outctl())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Ctrl2 {
+    fn format(&self, f: defmt::Formatter) {
+        defmt :: write ! (f , "Ctrl2 {{ updhld: {=bool:?}, updpos: {=bool:?}, mod_: {=bool:?}, dir: {=bool:?}, ruie: {=bool:?}, ruirq: {=bool:?}, roie: {=bool:?}, roirq: {=bool:?}, revmod: {=bool:?}, outctl: {=bool:?} }}" , self . updhld () , self . updpos () , self . mod_ () , self . dir () , self . ruie () , self . ruirq () , self . roie () , self . roirq () , self . revmod () , self . outctl ())
+    }
+}
+#[doc = "Input Filter Register"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Filt(pub u16);
+impl Filt {
+    #[doc = "Input Filter Sample Period"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn filt_per(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0xff;
+        val as u8
+    }
+    #[doc = "Input Filter Sample Period"]
+    #[inline(always)]
+    pub const fn set_filt_per(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u16) & 0xff) << 0usize);
+    }
+    #[doc = "Input Filter Sample Count"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn filt_cnt(&self) -> u8 {
+        let val = (self.0 >> 8usize) & 0x07;
+        val as u8
+    }
+    #[doc = "Input Filter Sample Count"]
+    #[inline(always)]
+    pub const fn set_filt_cnt(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x07 << 8usize)) | (((val as u16) & 0x07) << 8usize);
+    }
+    #[doc = "prescaler divide IPbus clock to FILT clk"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn filt_prsc(&self) -> u8 {
+        let val = (self.0 >> 13usize) & 0x07;
+        val as u8
+    }
+    #[doc = "prescaler divide IPbus clock to FILT clk"]
+    #[inline(always)]
+    pub const fn set_filt_prsc(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x07 << 13usize)) | (((val as u16) & 0x07) << 13usize);
+    }
+}
+impl Default for Filt {
+    #[inline(always)]
+    fn default() -> Filt {
+        Filt(0)
+    }
+}
+impl core::fmt::Debug for Filt {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Filt")
+            .field("filt_per", &self.filt_per())
+            .field("filt_cnt", &self.filt_cnt())
+            .field("filt_prsc", &self.filt_prsc())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Filt {
+    fn format(&self, f: defmt::Formatter) {
+        defmt::write!(
+            f,
+            "Filt {{ filt_per: {=u8:?}, filt_cnt: {=u8:?}, filt_prsc: {=u8:?} }}",
+            self.filt_per(),
+            self.filt_cnt(),
+            self.filt_prsc()
+        )
+    }
+}
+#[doc = "Input Monitor Register"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Imr(pub u16);
+impl Imr {
+    #[doc = "HOME"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn home(&self) -> bool {
+        let val = (self.0 >> 0usize) & 0x01;
+        val != 0
+    }
+    #[doc = "HOME"]
+    #[inline(always)]
+    pub const fn set_home(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 0usize)) | (((val as u16) & 0x01) << 0usize);
+    }
+    #[doc = "INDEX"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn index(&self) -> bool {
+        let val = (self.0 >> 1usize) & 0x01;
+        val != 0
+    }
+    #[doc = "INDEX"]
+    #[inline(always)]
+    pub const fn set_index(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 1usize)) | (((val as u16) & 0x01) << 1usize);
+    }
+    #[doc = "PHB"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn phb(&self) -> bool {
+        let val = (self.0 >> 2usize) & 0x01;
+        val != 0
+    }
+    #[doc = "PHB"]
+    #[inline(always)]
+    pub const fn set_phb(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 2usize)) | (((val as u16) & 0x01) << 2usize);
+    }
+    #[doc = "PHA"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn pha(&self) -> bool {
+        let val = (self.0 >> 3usize) & 0x01;
+        val != 0
+    }
+    #[doc = "PHA"]
+    #[inline(always)]
+    pub const fn set_pha(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 3usize)) | (((val as u16) & 0x01) << 3usize);
+    }
+    #[doc = "FHOM"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn fhom(&self) -> bool {
+        let val = (self.0 >> 4usize) & 0x01;
+        val != 0
+    }
+    #[doc = "FHOM"]
+    #[inline(always)]
+    pub const fn set_fhom(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 4usize)) | (((val as u16) & 0x01) << 4usize);
+    }
+    #[doc = "FIND"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn find(&self) -> bool {
+        let val = (self.0 >> 5usize) & 0x01;
+        val != 0
+    }
+    #[doc = "FIND"]
+    #[inline(always)]
+    pub const fn set_find(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 5usize)) | (((val as u16) & 0x01) << 5usize);
+    }
+    #[doc = "FPHB"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn fphb(&self) -> bool {
+        let val = (self.0 >> 6usize) & 0x01;
+        val != 0
+    }
+    #[doc = "FPHB"]
+    #[inline(always)]
+    pub const fn set_fphb(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 6usize)) | (((val as u16) & 0x01) << 6usize);
+    }
+    #[doc = "FPHA"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn fpha(&self) -> bool {
+        let val = (self.0 >> 7usize) & 0x01;
+        val != 0
+    }
+    #[doc = "FPHA"]
+    #[inline(always)]
+    pub const fn set_fpha(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 7usize)) | (((val as u16) & 0x01) << 7usize);
+    }
+}
+impl Default for Imr {
+    #[inline(always)]
+    fn default() -> Imr {
+        Imr(0)
+    }
+}
+impl core::fmt::Debug for Imr {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Imr")
+            .field("home", &self.home())
+            .field("index", &self.index())
+            .field("phb", &self.phb())
+            .field("pha", &self.pha())
+            .field("fhom", &self.fhom())
+            .field("find", &self.find())
+            .field("fphb", &self.fphb())
+            .field("fpha", &self.fpha())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Imr {
+    fn format(&self, f: defmt::Formatter) {
+        defmt :: write ! (f , "Imr {{ home: {=bool:?}, index: {=bool:?}, phb: {=bool:?}, pha: {=bool:?}, fhom: {=bool:?}, find: {=bool:?}, fphb: {=bool:?}, fpha: {=bool:?} }}" , self . home () , self . index () , self . phb () , self . pha () , self . fhom () , self . find () , self . fphb () , self . fpha ())
+    }
+}
+#[doc = "Test Register"]
+#[repr(transparent)]
+#[derive(Copy, Clone, Eq, PartialEq)]
+pub struct Tst(pub u16);
+impl Tst {
+    #[doc = "TEST_COUNT"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn test_count(&self) -> u8 {
+        let val = (self.0 >> 0usize) & 0xff;
+        val as u8
+    }
+    #[doc = "TEST_COUNT"]
+    #[inline(always)]
+    pub const fn set_test_count(&mut self, val: u8) {
+        self.0 = (self.0 & !(0xff << 0usize)) | (((val as u16) & 0xff) << 0usize);
+    }
+    #[doc = "TEST_PERIOD"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn test_period(&self) -> u8 {
+        let val = (self.0 >> 8usize) & 0x1f;
+        val as u8
+    }
+    #[doc = "TEST_PERIOD"]
+    #[inline(always)]
+    pub const fn set_test_period(&mut self, val: u8) {
+        self.0 = (self.0 & !(0x1f << 8usize)) | (((val as u16) & 0x1f) << 8usize);
+    }
+    #[doc = "Quadrature Decoder Negative Signal"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn qdn(&self) -> bool {
+        let val = (self.0 >> 13usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Quadrature Decoder Negative Signal"]
+    #[inline(always)]
+    pub const fn set_qdn(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 13usize)) | (((val as u16) & 0x01) << 13usize);
+    }
+    #[doc = "Test Counter Enable"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn tce(&self) -> bool {
+        let val = (self.0 >> 14usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Test Counter Enable"]
+    #[inline(always)]
+    pub const fn set_tce(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 14usize)) | (((val as u16) & 0x01) << 14usize);
+    }
+    #[doc = "Test Mode Enable"]
+    #[must_use]
+    #[inline(always)]
+    pub const fn ten(&self) -> bool {
+        let val = (self.0 >> 15usize) & 0x01;
+        val != 0
+    }
+    #[doc = "Test Mode Enable"]
+    #[inline(always)]
+    pub const fn set_ten(&mut self, val: bool) {
+        self.0 = (self.0 & !(0x01 << 15usize)) | (((val as u16) & 0x01) << 15usize);
+    }
+}
+impl Default for Tst {
+    #[inline(always)]
+    fn default() -> Tst {
+        Tst(0)
+    }
+}
+impl core::fmt::Debug for Tst {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        f.debug_struct("Tst")
+            .field("test_count", &self.test_count())
+            .field("test_period", &self.test_period())
+            .field("qdn", &self.qdn())
+            .field("tce", &self.tce())
+            .field("ten", &self.ten())
+            .finish()
+    }
+}
+#[cfg(feature = "defmt")]
+impl defmt::Format for Tst {
+    fn format(&self, f: defmt::Formatter) {
+        defmt :: write ! (f , "Tst {{ test_count: {=u8:?}, test_period: {=u8:?}, qdn: {=bool:?}, tce: {=bool:?}, ten: {=bool:?} }}" , self . test_count () , self . test_period () , self . qdn () , self . tce () , self . ten ())
+    }
+}
