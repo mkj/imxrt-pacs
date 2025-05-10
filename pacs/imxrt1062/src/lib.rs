@@ -1,5 +1,4 @@
 #![allow(warnings)]
-#![feature(const_mut_refs)]
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 #![no_std]
