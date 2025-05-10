@@ -5,9 +5,10 @@ transforms:
   - !DeleteEnums
     from: .*
     bit_size: 1
-  - !Rename
-    from: flexio1::(.*)
-    to: flexio::$1
+  # TODO
+  # - !Rename
+  #   from: flexio1
+  #   to: flexio
   - !Rename
     from: flexio::Flexio1
     to: flexio::Flexio
@@ -205,8 +206,8 @@ transforms:
     to: dma::regs::Tcd$1
     check: NoCheck
 
-  - !DeleteDuplicateEnumFields
-    from: .*
+  # - !DeleteDuplicateEnumFields
+  #   from: .*
 
   - !Sanitize
 
