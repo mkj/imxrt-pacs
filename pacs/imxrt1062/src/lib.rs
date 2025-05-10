@@ -6,38 +6,38 @@
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub enum Interrupt {
-    #[doc = "0 - DMA0_DMA16"]
-    DMA0_DMA16 = 0,
-    #[doc = "1 - DMA1_DMA17"]
-    DMA1_DMA17 = 1,
-    #[doc = "2 - DMA2_DMA18"]
-    DMA2_DMA18 = 2,
-    #[doc = "3 - DMA3_DMA19"]
-    DMA3_DMA19 = 3,
-    #[doc = "4 - DMA4_DMA20"]
-    DMA4_DMA20 = 4,
-    #[doc = "5 - DMA5_DMA21"]
-    DMA5_DMA21 = 5,
-    #[doc = "6 - DMA6_DMA22"]
-    DMA6_DMA22 = 6,
-    #[doc = "7 - DMA7_DMA23"]
-    DMA7_DMA23 = 7,
-    #[doc = "8 - DMA8_DMA24"]
-    DMA8_DMA24 = 8,
-    #[doc = "9 - DMA9_DMA25"]
-    DMA9_DMA25 = 9,
-    #[doc = "10 - DMA10_DMA26"]
-    DMA10_DMA26 = 10,
-    #[doc = "11 - DMA11_DMA27"]
-    DMA11_DMA27 = 11,
-    #[doc = "12 - DMA12_DMA28"]
-    DMA12_DMA28 = 12,
-    #[doc = "13 - DMA13_DMA29"]
-    DMA13_DMA29 = 13,
-    #[doc = "14 - DMA14_DMA30"]
-    DMA14_DMA30 = 14,
-    #[doc = "15 - DMA15_DMA31"]
-    DMA15_DMA31 = 15,
+    #[doc = "0 - DMA0"]
+    DMA0 = 0,
+    #[doc = "1 - DMA1"]
+    DMA1 = 1,
+    #[doc = "2 - DMA2"]
+    DMA2 = 2,
+    #[doc = "3 - DMA3"]
+    DMA3 = 3,
+    #[doc = "4 - DMA4"]
+    DMA4 = 4,
+    #[doc = "5 - DMA5"]
+    DMA5 = 5,
+    #[doc = "6 - DMA6"]
+    DMA6 = 6,
+    #[doc = "7 - DMA7"]
+    DMA7 = 7,
+    #[doc = "8 - DMA8"]
+    DMA8 = 8,
+    #[doc = "9 - DMA9"]
+    DMA9 = 9,
+    #[doc = "10 - DMA10"]
+    DMA10 = 10,
+    #[doc = "11 - DMA11"]
+    DMA11 = 11,
+    #[doc = "12 - DMA12"]
+    DMA12 = 12,
+    #[doc = "13 - DMA13"]
+    DMA13 = 13,
+    #[doc = "14 - DMA14"]
+    DMA14 = 14,
+    #[doc = "15 - DMA15"]
+    DMA15 = 15,
     #[doc = "16 - DMA_ERROR"]
     DMA_ERROR = 16,
     #[doc = "17 - CTI0_ERROR"]
@@ -468,11 +468,9 @@ pub const KPP: kpp::Kpp = unsafe { kpp::Kpp::from_ptr(0x401f_c000usize as _) };
 #[doc = "AIPSTZ Control Registers"]
 pub const AIPSTZ3: aipstz::Aipstz = unsafe { aipstz::Aipstz::from_ptr(0x4027_c000usize as _) };
 #[doc = "FlexSPI"]
-pub const FLEXSPI2: flex_spi::FlexSpi =
-    unsafe { flex_spi::FlexSpi::from_ptr(0x402a_4000usize as _) };
+pub const FLEXSPI2: flexspi::FlexSpi = unsafe { flexspi::FlexSpi::from_ptr(0x402a_4000usize as _) };
 #[doc = "FlexSPI"]
-pub const FLEXSPI: flex_spi::FlexSpi =
-    unsafe { flex_spi::FlexSpi::from_ptr(0x402a_8000usize as _) };
+pub const FLEXSPI: flexspi::FlexSpi = unsafe { flexspi::FlexSpi::from_ptr(0x402a_8000usize as _) };
 #[doc = "PXP v2.0 Register Reference Index"]
 pub const PXP: pxp::Pxp = unsafe { pxp::Pxp::from_ptr(0x402b_4000usize as _) };
 #[doc = "LCDIF Register Reference Index"]
@@ -602,10 +600,10 @@ pub mod dmamux;
 pub mod enc;
 pub mod enet;
 pub mod ewm;
-pub mod flex_spi;
 pub mod flexio;
 pub mod flexio1;
 pub mod flexram;
+pub mod flexspi;
 pub mod gpc;
 pub mod gpio;
 pub mod gpt;

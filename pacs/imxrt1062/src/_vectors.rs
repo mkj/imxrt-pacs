@@ -1,20 +1,20 @@
 extern "C" {
-    fn DMA0_DMA16();
-    fn DMA1_DMA17();
-    fn DMA2_DMA18();
-    fn DMA3_DMA19();
-    fn DMA4_DMA20();
-    fn DMA5_DMA21();
-    fn DMA6_DMA22();
-    fn DMA7_DMA23();
-    fn DMA8_DMA24();
-    fn DMA9_DMA25();
-    fn DMA10_DMA26();
-    fn DMA11_DMA27();
-    fn DMA12_DMA28();
-    fn DMA13_DMA29();
-    fn DMA14_DMA30();
-    fn DMA15_DMA31();
+    fn DMA0();
+    fn DMA1();
+    fn DMA2();
+    fn DMA3();
+    fn DMA4();
+    fn DMA5();
+    fn DMA6();
+    fn DMA7();
+    fn DMA8();
+    fn DMA9();
+    fn DMA10();
+    fn DMA11();
+    fn DMA12();
+    fn DMA13();
+    fn DMA14();
+    fn DMA15();
     fn DMA_ERROR();
     fn CTI0_ERROR();
     fn CTI1_ERROR();
@@ -165,54 +165,22 @@ pub union Vector {
 #[link_section = ".vector_table.interrupts"]
 #[no_mangle]
 pub static __INTERRUPTS: [Vector; 158] = [
-    Vector {
-        _handler: DMA0_DMA16,
-    },
-    Vector {
-        _handler: DMA1_DMA17,
-    },
-    Vector {
-        _handler: DMA2_DMA18,
-    },
-    Vector {
-        _handler: DMA3_DMA19,
-    },
-    Vector {
-        _handler: DMA4_DMA20,
-    },
-    Vector {
-        _handler: DMA5_DMA21,
-    },
-    Vector {
-        _handler: DMA6_DMA22,
-    },
-    Vector {
-        _handler: DMA7_DMA23,
-    },
-    Vector {
-        _handler: DMA8_DMA24,
-    },
-    Vector {
-        _handler: DMA9_DMA25,
-    },
-    Vector {
-        _handler: DMA10_DMA26,
-    },
-    Vector {
-        _handler: DMA11_DMA27,
-    },
-    Vector {
-        _handler: DMA12_DMA28,
-    },
-    Vector {
-        _handler: DMA13_DMA29,
-    },
-    Vector {
-        _handler: DMA14_DMA30,
-    },
-    Vector {
-        _handler: DMA15_DMA31,
-    },
+    Vector { _handler: DMA0 },
+    Vector { _handler: DMA1 },
+    Vector { _handler: DMA2 },
+    Vector { _handler: DMA3 },
+    Vector { _handler: DMA4 },
+    Vector { _handler: DMA5 },
+    Vector { _handler: DMA6 },
+    Vector { _handler: DMA7 },
+    Vector { _handler: DMA8 },
+    Vector { _handler: DMA9 },
+    Vector { _handler: DMA10 },
+    Vector { _handler: DMA11 },
+    Vector { _handler: DMA12 },
+    Vector { _handler: DMA13 },
+    Vector { _handler: DMA14 },
+    Vector { _handler: DMA15 },
     Vector {
         _handler: DMA_ERROR,
     },
