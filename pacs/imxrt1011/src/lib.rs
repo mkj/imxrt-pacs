@@ -1,5 +1,4 @@
 #![allow(warnings)]
-#![feature(const_mut_refs)]
 #![no_std]
 #![doc = "Peripheral access API (generated using chiptool v0.1.0 (6069091 2023-10-16))"]
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
