@@ -212,6 +212,11 @@ transforms:
     to: dma::regs::Tcd$1
     check: NoCheck
 
+  - !RenameEnumVariants
+    enum: iomuxc::vals::GpioDse
+    from: (DSE_[^_]*)_.*
+    to: $1
+
   # - !DeleteDuplicateEnumFields
   #   from: .*
 
