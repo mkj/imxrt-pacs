@@ -16,6 +16,9 @@ transforms:
     from: flex_spi::(.*)
     to: flexspi::$1
   - !Rename
+    from: (.*)::FlexSpi
+    to: $1::Flexspi
+  - !Rename
     from: lp(.*)1::(.*)
     to: lp$1::$2
   - !Rename
