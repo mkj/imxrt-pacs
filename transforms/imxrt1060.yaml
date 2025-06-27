@@ -3,3 +3,123 @@ transforms:
   # DMA0_DMA16 to DMA0 etc, for consistency with rt1010
     from: DMA(.*)_DMA.*
     to: DMA$1
+
+  # IOMUXC
+
+  - !RenameEnumVariants
+    enum: iomuxc::vals::SwPadCtlPadGpio(.*)(\d+)dse
+    from: (.*)_
+    to: $1
+
+  - !RenameEnumVariants
+    enum: iomuxc::vals::SwPadCtlPadGpio(.*)(\d+)dse
+    from: DSE_1_R0_150_OHM___3_3V__260_OHM_1_8V
+    to: DSE_1_R0_150_OHM_3_3V_260_OHM_1_8V
+
+  - !Rename
+    from: iomuxc::vals::SwMuxCtlPadGpio(.*)(\d+)muxMode
+    to: iomuxc::vals::GpioMuxMode$1$2
+
+  - !MergeEnums
+    from: iomuxc::vals::SwPadCtlPadGpio(.*)(\d+)speed
+    to: iomuxc::vals::GpioSpeed
+
+  - !MergeEnums
+    from: iomuxc::vals::SwPadCtlPadGpio(.*)(\d+)pus
+    to: iomuxc::vals::GpioPus
+
+  - !MergeEnums
+    from: iomuxc::vals::SwPadCtlPadGpio(.*)(\d+)dse
+    to: iomuxc::vals::GpioDse
+
+  # SPI_b? is irregular, ignore that.
+  - !MakeRegisterArray
+    blocks: iomuxc::Iomuxc
+    from: sw_pad_ctl_pad_gpio_b0_\d+
+    to: gpio_ctl_b0_x
+
+  - !MakeRegisterArray
+    blocks: iomuxc::Iomuxc
+    from: sw_pad_ctl_pad_gpio_b1_\d+
+    to: gpio_ctl_b1_x
+
+  - !MakeRegisterArray
+    blocks: iomuxc::Iomuxc
+    from: sw_pad_ctl_pad_gpio_sd_b0_\d+
+    to: gpio_ctl_sd_b0_x
+
+  - !MakeRegisterArray
+    blocks: iomuxc::Iomuxc
+    from: sw_pad_ctl_pad_gpio_sd_b1_\d+
+    to: gpio_ctl_sd_b1_x
+
+  - !MakeRegisterArray
+    blocks: iomuxc::Iomuxc
+    from: sw_pad_ctl_pad_gpio_ad_b0_\d+
+    to: gpio_ctl_ad_b0_x
+    
+  - !MakeRegisterArray
+    blocks: iomuxc::Iomuxc
+    from: sw_pad_ctl_pad_gpio_ad_b1_\d+
+    to: gpio_ctl_ad_b1_x
+
+  - !MakeRegisterArray
+    blocks: iomuxc::Iomuxc
+    from: sw_pad_ctl_pad_gpio_emc_\d+
+    to: gpio_ctl_emc_x
+
+  # - !Rename
+  #   from: iomuxc::vals::SwMuxCtlPadGpio(.*)muxMode
+  #   to: iomuxc::vals::GpioMuxMode$1
+
+  # - !Rename
+  #   from: iomuxc::vals::SwPadCtlPadGpio.*Speed
+  #   to: iomuxc::vals::GpioSpeed
+
+  # - !Rename
+  #   from: iomuxc::vals::SwMuxCtlPadGpio(..)?B(\d)_(\d+)MuxMode
+  #   to: iomuxc::vals::GpioMuxMode$1$2$3
+
+  # - !MergeEnums
+  #   from: iomuxc::vals::SwPadCtlPadGpio.?.?B\d_\d+Speed
+  #   to: iomuxc::vals::GpioSpeed
+
+  # - !MergeEnums
+  #   from: iomuxc::vals::SwPadCtlPadGpioB\d+Pus
+  #   to: iomuxc::vals::GpioPus
+
+  # - !MergeEnums
+  #   from: iomuxc::vals::SwPadCtlPadGpio.?.?B\d_\d+Dse
+  #   to: iomuxc::vals::GpioDse
+
+  # - !MergeFieldsets
+  #   from: iomuxc::regs::SwPadCtlPadGpioB\d+
+  #   to: iomuxc::regs::GpioCtl
+
+  # - !MergeFieldsets
+  #   from: iomuxc::regs::SwMuxCtlPadGpio(Ad|Sd)?B(\d)_(\d+)
+  #   to: iomuxc::regs::GpioMuxCtl$1$2$3
+
+  # - !MakeRegisterArray
+  #   blocks: iomuxc::Iomuxc
+  #   from: sw_pad_ctl_pad_gpio_B\d_\d+
+  #   to: gpio_ctl_x
+  # - !MakeRegisterArray
+  #   blocks: iomuxc::Iomuxc
+  #   from: sw_pad_ctl_pad_gpio_ad_B\d_\d+
+  #   to: gpio_ctl_ad_x
+  # - !MakeRegisterArray
+  #   blocks: iomuxc::Iomuxc
+  #   from: sw_pad_ctl_pad_gpio_sd_B\d_\d+
+  #   to: gpio_ctl_sd_x
+
+  # - !RenameFields
+  #   fieldset: .*
+  #   from: sw_mux_ctl_pad_gpio_ad_B\d_\d+
+  #   to: mux_gpio_ad_\d+
+
+  # - !RenameRegisters
+  #   block: .*
+  #   from: sw_mux_ctl_pad_gpio_(.._)?B(\d)_(\d+)
+  #   to: gpio_mux_$1$2$3
+
