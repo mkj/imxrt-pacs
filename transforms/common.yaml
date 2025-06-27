@@ -109,54 +109,6 @@ transforms:
     from: endptctrl\d+
     to: endptctrl_x
 
-  # IOMUXC
-  - !Rename
-    from: iomuxc::vals::SwMuxCtlPadGpio(..)?(\d+)MuxMode
-    to: iomuxc::vals::GpioMuxMode$1$2
-
-  - !MergeEnums
-    from: iomuxc::vals::SwPadCtlPadGpio.?.?\d+Speed
-    to: iomuxc::vals::GpioSpeed
-
-  - !MergeEnums
-    from: iomuxc::vals::SwPadCtlPadGpio.?.?\d+Pus
-    to: iomuxc::vals::GpioPus
-
-  - !MergeEnums
-    from: iomuxc::vals::SwPadCtlPadGpio.?.?\d+Dse
-    to: iomuxc::vals::GpioDse
-
-  - !MergeFieldsets
-    from: iomuxc::regs::SwPadCtlPadGpio(..)?(\d+)
-    to: iomuxc::regs::GpioCtl
-
-  - !MergeFieldsets
-    from: iomuxc::regs::SwMuxCtlPadGpio(Ad|Sd)?(\d+)
-    to: iomuxc::regs::GpioMuxCtl$1$2
-
-  - !MakeRegisterArray
-    blocks: iomuxc::Iomuxc
-    from: sw_pad_ctl_pad_gpio_\d+
-    to: gpio_ctl_x
-  - !MakeRegisterArray
-    blocks: iomuxc::Iomuxc
-    from: sw_pad_ctl_pad_gpio_ad_\d+
-    to: gpio_ctl_ad_x
-  - !MakeRegisterArray
-    blocks: iomuxc::Iomuxc
-    from: sw_pad_ctl_pad_gpio_sd_\d+
-    to: gpio_ctl_sd_x
-
-  - !RenameFields
-    fieldset: .*
-    from: sw_mux_ctl_pad_gpio_ad_\d+
-    to: mux_gpio_ad_\d+
-
-  - !RenameRegisters
-    block: .*
-    from: sw_mux_ctl_pad_gpio_(.._)?(\d+)
-    to: gpio_mux_$1$2
-
   # DMA
   - !MergeEnums
     from: dma::vals::Tcd\d+([^\d]*)
